@@ -1,10 +1,16 @@
 package fr.eni.javaee.shoppinglist.bo;
 
 public class Article {
-	private int id;
+	private int articleId;
 	private String name;
 	private boolean status;
 	private ShoppingList shoppingList;
+	
+	public Article(String name) {
+		super();
+		this.name = name;
+		this.status = false;
+	}
 	
 	public Article(String name, ShoppingList shoppingList) {
 		super();
@@ -13,20 +19,20 @@ public class Article {
 		this.shoppingList = shoppingList;
 	}
 	
-	public Article(int id, String name, boolean status, ShoppingList shoppingList) {
+	public Article(int articleId, String name, boolean status, ShoppingList shoppingList) {
 		super();
-		this.id = id;
+		this.articleId = articleId;
 		this.name = name;
 		this.status = status;
 		this.shoppingList = shoppingList;
 	}
 	
 	
-	public int getId() {
-		return id;
+	public int getArticleId() {
+		return articleId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
 	}
 	public String getName() {
 		return name;

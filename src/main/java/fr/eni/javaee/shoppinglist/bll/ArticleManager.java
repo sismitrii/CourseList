@@ -16,16 +16,23 @@ public class ArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 
-	public void createArticle(String articleName, ShoppingList shoppingList) throws DALException, BusinessException {
+	public int createArticle(String articleName, int shoppingListId) throws DALException, BusinessException {
 		if (articleName == null || StringUtils.isEmpty(articleName)) {
 			throw new BusinessException("Name of the article to add can't be null or empty");
 		}
 		
-		if (shoppingList == null) {
-			throw new BusinessException("ShoppingList not null is mandatory to add an article");
-		}
+		Article articleToInsert = new Article(articleName);
+		articleDAO.insert(articleToInsert, shoppingListId);
+		return articleToInsert.getArticleId();
+	}
 		
-		Article articleToInsert = new Article(articleName, shoppingList);
-		articleDAO.insert(articleToInsert);
+	
+	public void deleteArticle(int articleId) throws DALException {
+		
+		articleDAO.delete(articleId);
+	}
+	
+	public void deleteAllArticleForList(int listId) throws DALException {
+		articleDAO.deleteByListId(listId);
 	}
 }
