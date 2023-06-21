@@ -4,6 +4,10 @@ public class ShoppingList {
 	private int shoppingListId;
 	private String name;
 	
+	public ShoppingList(String name) {
+		super();
+		this.name = name;
+	}
 	
 	public ShoppingList(int shoppingListId, String name) {
 		super();

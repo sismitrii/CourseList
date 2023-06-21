@@ -6,9 +6,8 @@ public class Article {
 	private boolean status;
 	private ShoppingList shoppingList;
 	
-	public Article(int id, String name, ShoppingList shoppingList) {
+	public Article(String name, ShoppingList shoppingList) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.status = false;
 		this.shoppingList = shoppingList;

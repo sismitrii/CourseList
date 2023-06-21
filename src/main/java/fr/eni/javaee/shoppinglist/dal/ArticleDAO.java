@@ -1,6 +1,7 @@
 package fr.eni.javaee.shoppinglist.dal;
 
 import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.bo.Article;
 
 public interface ArticleDAO {
 	
