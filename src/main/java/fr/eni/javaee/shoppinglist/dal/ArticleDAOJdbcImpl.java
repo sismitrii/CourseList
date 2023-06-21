@@ -75,17 +75,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			throw new DALException(message);
 		}		
 	}
-//
-//	@Override
-//	public void changeStatus(int articleId, boolean status) {
-//		// TODO 
-//		
-//	}
-//
-//	@Override
-//	public void changeAllStatus() {
-//		// TODO 
-
+	
 	@Override
 	public List<Article> getArticleByShoppingListId(int shoppingListId) throws DALException {
 		List<Article> articles = new ArrayList<>();
@@ -104,6 +94,47 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		return articles;
 	}
+
+	@Override
+	public void changeStatus(int articleId) throws DALException {
+		String UPDATE = "UPDATE Article SET [status] = ~(status)  WHERE [articleId] = ?;";
+
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(UPDATE);
+			pst.setInt(1, articleId);
+			int modif = pst.executeUpdate();
+			if (modif <=0) {
+				throw new DALException(String.format("No Article found for this articleId : %d", articleId ));
+			}
+		} catch (SQLException e) {
+			String message = String.format("An error happen during update of articles : %d", articleId);
+			e.printStackTrace();
+			System.err.println(message);
+			throw new DALException(message);
+		} 	
+	}
+
+	@Override
+	public void resetStatusForShoppingListArticle(int shoppingListId) throws DALException {
+		String UPDATE_FOR_LIST_ID = "UPDATE Article SET [status] = 0  WHERE [listId] = ?;";
+
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(UPDATE_FOR_LIST_ID);
+			pst.setInt(1, shoppingListId);
+			int modif = pst.executeUpdate();
+			if (modif <=0) {
+				System.out.println(String.format("No articles status modified for this shoppingList : %d",shoppingListId ));
+			}
+		} catch (SQLException e) {
+			String message = String.format("An error happen during update of articles of the shoppingList : %d", shoppingListId);
+			e.printStackTrace();
+			System.err.println(message);
+			throw new DALException(message);
+		} 	
+		
+	}
+
+
 		
 //	}
 	

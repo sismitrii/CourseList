@@ -42,5 +42,13 @@ public class ArticleManager {
 		return articleDAO.getArticleByShoppingListId(shoppingListId);
 	}
 	
+	public void changeStatus(int articleId) throws DALException {
+		articleDAO.changeStatus(articleId);
+	}
+	
+	public void resetShoppingListStatus(int shoppingListId) throws DALException {
+		articleDAO.resetStatusForShoppingListArticle(shoppingListId);
+	}
+	
 
 }
