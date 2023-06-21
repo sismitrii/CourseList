@@ -1,7 +1,10 @@
 <%
 	String mainTitle = "Courses";
-	String secondaryTitle = "Liste prédéfinies";
+	String secondaryTitle = "Nouvelle Liste";
 %>
+<c:if test="${!empty id}">
+	<c:set var="secondaryTitle" value="${param.list.getName()}" />
+</c:if>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./fragments/header.jsp">
 	<jsp:param name="mainTitle" value="<%= mainTitle %>"/>
