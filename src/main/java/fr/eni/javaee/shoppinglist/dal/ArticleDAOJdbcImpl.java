@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.javaee.shoppinglist.DALException;
 import fr.eni.javaee.shoppinglist.bo.Article;
+import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
@@ -48,7 +51,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				System.out.println("No Article found for this Id");
 			}
 		} catch (SQLException e) {
-			String message = String.format("An error happen during delete Article : %s", articleId);
+			String message = String.format("An error happen during delete Article : %d", articleId);
 			e.printStackTrace();
 			System.err.println(message);
 			throw new DALException(message);
@@ -63,14 +66,14 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			pst.setInt(1, listId);
 			int modif = pst.executeUpdate();
 			if (modif <=0) {
-				throw new DALException(String.format("No Article found for this listId : %s", listId ));
+				throw new DALException(String.format("No Article found for this listId : %d", listId ));
 			}
 		} catch (SQLException e) {
-			String message = String.format("An error happen during delete of articles of List : %s", listId);
+			String message = String.format("An error happen during delete of articles of List : %d", listId);
 			e.printStackTrace();
 			System.err.println(message);
 			throw new DALException(message);
-			}		
+		}		
 	}
 //
 //	@Override
@@ -82,6 +85,25 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 //	@Override
 //	public void changeAllStatus() {
 //		// TODO 
+
+	@Override
+	public List<Article> getArticleByShoppingListId(int shoppingListId) throws DALException {
+		List<Article> articles = new ArrayList<>();
+		String SELECT_BY_LISTID = "SELECT [articleId], [name], [status] FROM Article WHERE listId = ?";
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(SELECT_BY_LISTID, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, shoppingListId);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				Article article = new Article(rs.getInt(1), rs.getString(2), rs.getBoolean(3));
+				articles.add(article);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException(String.format("An error happen during getArticleByShoppingListId of ShoppingList : %d", shoppingListId));
+		}
+		return articles;
+	}
 		
 //	}
 	

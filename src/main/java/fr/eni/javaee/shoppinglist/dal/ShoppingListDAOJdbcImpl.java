@@ -45,16 +45,15 @@ public class ShoppingListDAOJdbcImpl implements ShoppingListDAO {
 			pst.setInt(1, shoppingListId);
 			int modif = pst.executeUpdate();
 			if (modif <=0) {
-				throw new DALException(String.format("No List found for this listId : %s", shoppingListId ));
+				throw new DALException(String.format("No List found for this listId : %d", shoppingListId ));
 			}
 		} catch (SQLException e) {
-			String message = String.format("An error happen during delete of articles of List : %s", shoppingListId);
+			String message = String.format("An error happen during delete of articles of List : %d", shoppingListId);
 			e.printStackTrace();
 			System.err.println(message);
 			throw new DALException(message);
 		}
-		
-		
+			
 	}
 
 	@Override
@@ -70,15 +69,27 @@ public class ShoppingListDAOJdbcImpl implements ShoppingListDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DALException("An error happen during getAll of ShoppingList");
+			throw new DALException("An error happen during getAllShoppingList");
 		}
 
 		return shoppingLists;
 	}
 
 	@Override
-	public ShoppingList getListById(int id) {
-		// TODO Auto-generated method stub
+	public ShoppingList getShoppingListById(int shoppingListId) throws DALException {
+		String SELECT_BY_LISTID = "SELECT [listId],[name] FROM List WHERE listId = ?";
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(SELECT_BY_LISTID, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, shoppingListId);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()) {
+				return new ShoppingList(rs.getInt(1), rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException(String.format("An error happen during getShoppingListById for shoppingList : %d", shoppingListId));
+		}
+
 		return null;
 	}
 	

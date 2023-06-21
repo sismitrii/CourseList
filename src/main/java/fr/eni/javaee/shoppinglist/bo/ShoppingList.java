@@ -1,8 +1,11 @@
 package fr.eni.javaee.shoppinglist.bo;
 
+import java.util.List;
+
 public class ShoppingList {
 	private int shoppingListId;
 	private String name;
+	private List<Article> articleList;
 	
 	public ShoppingList(String name) {
 		super();
@@ -27,6 +30,16 @@ public class ShoppingList {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<Article> getArticleList() {
+		return articleList;
+	}
+
+	public void setArticleList(List<Article> articleList) {
+		this.articleList = articleList;
+	}
+	
+	
 	
 	
 }

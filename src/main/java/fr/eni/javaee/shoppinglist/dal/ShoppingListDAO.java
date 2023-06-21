@@ -13,6 +13,6 @@ public interface ShoppingListDAO {
 	
 	public List<ShoppingList> getAllShoppingList() throws DALException;
 	
-	public ShoppingList getListById(int id);
+	public ShoppingList getShoppingListById(int shoppingListId) throws DALException;
 
 }

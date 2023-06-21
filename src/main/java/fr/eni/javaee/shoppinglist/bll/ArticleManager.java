@@ -1,5 +1,7 @@
 package fr.eni.javaee.shoppinglist.bll;
 
+import java.util.List;
+
 import com.microsoft.sqlserver.jdbc.StringUtils;
 
 import fr.eni.javaee.shoppinglist.BusinessException;
@@ -35,4 +37,10 @@ public class ArticleManager {
 	public void deleteAllArticleForList(int listId) throws DALException {
 		articleDAO.deleteByListId(listId);
 	}
+	
+	public List<Article> getArticlesForShoppingList(int shoppingListId) throws DALException{
+		return articleDAO.getArticleByShoppingListId(shoppingListId);
+	}
+	
+
 }

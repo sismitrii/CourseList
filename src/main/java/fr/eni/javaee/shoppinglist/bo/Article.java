@@ -19,12 +19,11 @@ public class Article {
 		this.shoppingList = shoppingList;
 	}
 	
-	public Article(int articleId, String name, boolean status, ShoppingList shoppingList) {
+	public Article(int articleId, String name, boolean status) {
 		super();
 		this.articleId = articleId;
 		this.name = name;
 		this.status = status;
-		this.shoppingList = shoppingList;
 	}
 	
 	

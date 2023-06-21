@@ -45,5 +45,16 @@ public class ShoppingListManager {
 		
 	}
 	
+	public ShoppingList getShoppingListById(int shoppingListId) throws DALException, BusinessException {	
+		ShoppingList shoppingList = shoppingListDAO.getShoppingListById(shoppingListId);
+		if (shoppingList == null) {
+			throw new BusinessException(String.format("No shopping List Found for this shoppingListId : %d", shoppingListId));
+		}
+		shoppingList.setArticleList(articleManager.getArticlesForShoppingList(shoppingListId));
+		
+		return shoppingList;
+		
+	}
+	
 	
 }
