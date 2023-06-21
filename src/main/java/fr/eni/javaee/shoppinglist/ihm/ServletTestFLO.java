@@ -13,6 +13,7 @@ import fr.eni.javaee.shoppinglist.BusinessException;
 import fr.eni.javaee.shoppinglist.DALException;
 import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
+import fr.eni.javaee.shoppinglist.bo.Article;
 import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 
 /**
@@ -48,12 +49,17 @@ public class ServletTestFLO extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//int test = shoppingListManager.createShoppingList("list4", "article4");
-			shoppingListManager.deleteList(15);
-//			int test = articleManager.createArticle("pate", 15);
-//			articleManager.createArticle("riz", 15);
-//			System.out.println(test);
-		} catch (DALException e ) {
+			//int test = shoppingListManager.createShoppingList("list22", "article22");
+			//shoppingListManager.deleteList(15);
+//			int test = articleManager.createArticle("pate", 16);
+//			articleManager.createArticle("riz", 16);
+			ShoppingList test = shoppingListManager.getShoppingListById(16);
+			System.out.println(test.getName());
+			System.out.println(test.getShoppingListId());
+			for (Article a : test.getArticleList()) {
+				System.out.println(a.getName());
+			}
+		} catch (DALException | BusinessException e ) {
 			e.printStackTrace();
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
