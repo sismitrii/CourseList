@@ -21,7 +21,7 @@ public class ShoppingListManager {
 		articleManager = new ArticleManager();
 	}
 	
-	public void createShoppingList(String shoppingListName, String articleName) throws BusinessException, DALException {
+	public int createShoppingList(String shoppingListName, String articleName) throws BusinessException, DALException {
 		if (shoppingListName == null || StringUtils.isEmpty(shoppingListName)) {
 			throw new BusinessException("Name of the shopingList to create can't be null or empty");
 		}
@@ -31,7 +31,8 @@ public class ShoppingListManager {
 		}
 		ShoppingList shoppingListToCreate = new ShoppingList(shoppingListName);
 		shoppingListDAO.insert(shoppingListToCreate);
-		articleManager.createArticle(articleName, shoppingListToCreate);
+		articleManager.createArticle(articleName, shoppingListToCreate.getShoppingListId());
+		return shoppingListToCreate.getShoppingListId();
 	}
 	
 	public List<ShoppingList> getAllShoppingList() throws DALException {

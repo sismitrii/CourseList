@@ -12,7 +12,7 @@ import fr.eni.javaee.shoppinglist.bo.Article;
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
-	public void insert(Article article) throws DALException {
+	public void insert(Article article, int shoppingListId) throws DALException {
 		String INSERT = "INSERT INTO Article (name, listId) VALUES (?,?)";
 		if (article == null) {
 			throw new DALException("Enable to insert null article");
@@ -21,11 +21,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		try( Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pst = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setString(1, article.getName());
-			pst.setInt(2, article.getShoppingList().getShoppingListId());
+			pst.setInt(2, shoppingListId);
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
 			while (rs.next()) {
-				article.setId(rs.getInt(1));
+				article.setArticleId(rs.getInt(1));
 			}
 			
 		} catch (SQLException e) {

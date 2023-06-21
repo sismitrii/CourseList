@@ -48,11 +48,11 @@ public class ServletTestFLO extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			//shoppingListManager.createShoppingList("list4", "article4");
-			shoppingListManager.deleteList(12);
-//			articleManager.createArticle("pate", new ShoppingList(12, "deleted"));
-//			articleManager.createArticle("riz", new ShoppingList(12, "deleted"));
-
+			//int test = shoppingListManager.createShoppingList("list4", "article4");
+			shoppingListManager.deleteList(15);
+//			int test = articleManager.createArticle("pate", 15);
+//			articleManager.createArticle("riz", 15);
+//			System.out.println(test);
 		} catch (DALException e ) {
 			e.printStackTrace();
 		}
