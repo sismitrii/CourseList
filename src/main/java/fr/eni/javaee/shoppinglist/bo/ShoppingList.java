@@ -9,6 +9,12 @@ public class ShoppingList {
 		this.name = name;
 	}
 	
+	public ShoppingList(int shoppingListId, String name) {
+		super();
+		this.shoppingListId = shoppingListId;
+		this.name = name;
+	}
+	
 	public int getShoppingListId() {
 		return shoppingListId;
 	}

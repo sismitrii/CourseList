@@ -35,22 +35,22 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 	}
 
-	@Override
-	public void delete(int articleId) {
-		// TODO 
+//	@Override
+//	public void delete(int articleId) {
+//		// TODO 
+//		
+//	}
+//
+//	@Override
+//	public void changeStatus(int articleId, boolean status) {
+//		// TODO 
+//		
+//	}
+//
+//	@Override
+//	public void changeAllStatus() {
+//		// TODO 
 		
-	}
-
-	@Override
-	public void changeStatus(int articleId, boolean status) {
-		// TODO 
-		
-	}
-
-	@Override
-	public void changeAllStatus() {
-		// TODO 
-		
-	}
+//	}
 	
 }

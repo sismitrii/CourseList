@@ -12,8 +12,7 @@ import fr.eni.javaee.shoppinglist.dal.DAOFactory;
 public class ArticleManager {
 	private ArticleDAO articleDAO;
 	
-	public ArticleManager(ArticleDAO articleDAO) {
-		super();
+	public ArticleManager() {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 

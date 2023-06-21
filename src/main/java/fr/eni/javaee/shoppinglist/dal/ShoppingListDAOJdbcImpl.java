@@ -1,9 +1,11 @@
 package fr.eni.javaee.shoppinglist.dal;
 
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.javaee.shoppinglist.DALException;
@@ -13,7 +15,7 @@ public class ShoppingListDAOJdbcImpl implements ShoppingListDAO {
 
 	@Override
 	public void insert(ShoppingList shoppingList) throws DALException {
-		String INSERT = "INSERT INTO List (name) VALUES ?";
+		String INSERT = "INSERT INTO List (name) VALUES (?)";
 		
 		try( Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pst = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -41,9 +43,22 @@ public class ShoppingListDAOJdbcImpl implements ShoppingListDAO {
 	}
 
 	@Override
-	public List<ShoppingList> getAllShoppingList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ShoppingList> getAllShoppingList() throws DALException {
+		String GETALL = "SELECT [listId],[name] FROM List";
+		List<ShoppingList> shoppingLists = new ArrayList<>();
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			Statement stm = cnx.createStatement();
+			ResultSet rs = stm.executeQuery(GETALL);
+			while(rs.next()) {
+				ShoppingList shoppingList = new ShoppingList(rs.getInt(1), rs.getString(2));
+				shoppingLists.add(shoppingList);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException("An error happen during getAll of ShoppingList");
+		}
+
+		return shoppingLists;
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public interface ShoppingListDAO {
 	
 	public void delete(int shoppingListId);
 	
-	public List<ShoppingList> getAllShoppingList();
+	public List<ShoppingList> getAllShoppingList() throws DALException;
 	
 	public ShoppingList getListById(int id);
 

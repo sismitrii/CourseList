@@ -1,5 +1,7 @@
 package fr.eni.javaee.shoppinglist.bll;
 
+import java.util.List;
+
 import com.microsoft.sqlserver.jdbc.StringUtils;
 
 import fr.eni.javaee.shoppinglist.BusinessException;
@@ -13,9 +15,10 @@ public class ShoppingListManager {
 	private ShoppingListDAO shoppingListDAO;
 	private ArticleManager articleManager;
 
-	public ShoppingListManager(ShoppingListDAO shoppingListDAO) {
+	public ShoppingListManager() {
 		super();
 		this.shoppingListDAO = DAOFactory.getShoppingListDAO();
+		articleManager = new ArticleManager();
 	}
 	
 	public void createShoppingList(String shoppingListName, String articleName) throws BusinessException, DALException {
@@ -29,6 +32,10 @@ public class ShoppingListManager {
 		ShoppingList shoppingListToCreate = new ShoppingList(shoppingListName);
 		shoppingListDAO.insert(shoppingListToCreate);
 		articleManager.createArticle(articleName, shoppingListToCreate);
+	}
+	
+	public List<ShoppingList> getAllShoppingList() throws DALException {
+		return shoppingListDAO.getAllShoppingList();
 	}
 	
 	
