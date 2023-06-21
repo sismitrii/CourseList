@@ -38,13 +38,16 @@ public class ServletListManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/manageList.jsp");
-		
-		if(request.getAttribute("id") != null && request.getAttribute("action") != null) {
-			
-		} else {
+		/*
+		if(request.getAttribute("id") == -1) {
+			// Créer la liste
+		}
+		// Récupérer l'id
+		// Récupérer la liste avec l'id
+		if(request.getAttribute("action") != null)
 			
 		}
-		
+		*/
 		rd.forward(request, response);
 	}
 
