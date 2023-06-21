@@ -24,3 +24,7 @@ function validate(id) {
 		}
   }
 }
+
+function validateNewArticle() {
+	
+}

@@ -53,19 +53,7 @@ public class MainServlet extends HttpServlet {
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		/*
-		ShoppingList sl;
-		sl = new ShoppingList("List 1");
-		lists.add(sl);
-		sl = new ShoppingList("List 2");
-		lists.add(sl);
-		sl = new ShoppingList("List 3");
-		lists.add(sl);
-		sl = new ShoppingList("List 4");
-		lists.add(sl);
-		*/
-		
+		}		
 		request.setAttribute("lists", lists);
 		
 		rd.forward(request, response);
