@@ -5,7 +5,6 @@ public class ShoppingList {
 	private String name;
 	
 	
-	
 	public ShoppingList(int shoppingListId, String name) {
 		super();
 		this.shoppingListId = shoppingListId;
