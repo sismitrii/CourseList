@@ -4,6 +4,7 @@ import com.microsoft.sqlserver.jdbc.StringUtils;
 
 import fr.eni.javaee.shoppinglist.BusinessException;
 import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 import fr.eni.javaee.shoppinglist.dal.DAOFactory;
 import fr.eni.javaee.shoppinglist.dal.ShoppingListDAO;

@@ -1,41 +1,35 @@
 <%
-	String title = "Courses";
-	String subtitle = "Liste prédéfinies";
+	String mainTitle = "Courses";
+	String secondaryTitle = "Liste prédéfinies";
 %>
-<%@include file="fragments/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="./fragments/header.jsp">
+	<jsp:param name="mainTitle" value="<%= mainTitle %>"/>
+	<jsp:param name="secondaryTitle" value="<%= secondaryTitle %>"/>
+</jsp:include>
+
 		<div class="MainContainer">
-			<div class="title">
-				<h1><%= title %></h1>
-			</div>
 			<div class="content">
+				<div class="col-12">
+				    <h2 class="my-5 text-center"><%= secondaryTitle %></h2>
+				
+				    <div class="row">
+				        <ul class="list-group col-12">
+				        		<!--  ONE LIST ITEM TEMPLATE -->
+				        		<c:forEach items="${lists}" var="v">
+				            <li class="list-group-item d-flex justify-content-between align-items-center">${v.getName()}
+				                <div>
+				                    <a href="panier.html?id=${v.getShoppingListId()}" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
+				                    <a href="#supprimer" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
+				                </div>
+				             </li>
+										</c:forEach>
+				            
+				        </ul>
+				    </div>
+				</div>
 			</div>
 		</div>
 
-<div class="col-12">
-    <h2 class="my-5 text-center">Listes prédéfinies</h2>
-
-    <div class="row">
-        <ul class="list-group col-12">
-            <li class="list-group-item d-flex justify-content-between align-items-center">Liste bio
-                <div>
-                    <a href="panier.html" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
-                    <a href="#supprimer" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
-                </div>
-
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">Liste grande surface
-                <div>
-                    <a href="panier.html" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
-                    <a href="#supprimer" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">Liste surgelés
-                <div>
-                    <a href="panier.html" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
-                    <a href="#supprimer" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
-                </div>
-            </li>
-        </ul>
-    </div>
-<%@include file="fragments/footer.jsp" %>
+<jsp:include page="./fragments/footer.jsp"></jsp:include>
 

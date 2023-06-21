@@ -1,2 +1,29 @@
 @charset "UTF-8";
 
+footer {
+	color :white;
+}
+
+footer .credits{
+	margin : 10px 0px;
+}
+
+footer a.btn {
+	color : gray;
+	padding : 5px 5px 0px 5px;
+	margin-top : 7px;
+}
+
+footer a.btn:hover {
+	color : white;
+	border : 1px solid white;
+	border-radius : 20px;
+}
+
+div.clear {
+	clear : both;
+}
+
+div.headerSpacer {
+	min-height : 50px;
+}
