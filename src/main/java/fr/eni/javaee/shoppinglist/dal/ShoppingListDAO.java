@@ -9,7 +9,7 @@ public interface ShoppingListDAO {
 
 	public void insert(ShoppingList shoppingList) throws DALException;
 	
-	public void delete(int shoppingListId);
+	public void delete(int shoppingListId) throws DALException;
 	
 	public List<ShoppingList> getAllShoppingList() throws DALException;
 	

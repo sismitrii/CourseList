@@ -37,8 +37,23 @@ public class ShoppingListDAOJdbcImpl implements ShoppingListDAO {
 	}
 
 	@Override
-	public void delete(int shoppingListId) {
-		// TODO Auto-generated method stub
+	public void delete(int shoppingListId) throws DALException {
+		String DELETE = "DELETE List WHERE listId = ?";
+
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(DELETE);
+			pst.setInt(1, shoppingListId);
+			int modif = pst.executeUpdate();
+			if (modif <=0) {
+				throw new DALException(String.format("No List found for this listId : %s", shoppingListId ));
+			}
+		} catch (SQLException e) {
+			String message = String.format("An error happen during delete of articles of List : %s", shoppingListId);
+			e.printStackTrace();
+			System.err.println(message);
+			throw new DALException(message);
+		}
+		
 		
 	}
 

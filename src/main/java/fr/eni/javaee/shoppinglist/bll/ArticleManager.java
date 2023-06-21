@@ -28,4 +28,14 @@ public class ArticleManager {
 		Article articleToInsert = new Article(articleName, shoppingList);
 		articleDAO.insert(articleToInsert);
 	}
+		
+	
+	public void deleteArticle(int articleId) throws DALException {
+		
+		articleDAO.delete(articleId);
+	}
+	
+	public void deleteAllArticleForList(int listId) throws DALException {
+		articleDAO.deleteByListId(listId);
+	}
 }

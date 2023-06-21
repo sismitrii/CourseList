@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.javaee.shoppinglist.BusinessException;
 import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
 import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 
@@ -21,6 +22,7 @@ import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 public class ServletTestFLO extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ShoppingListManager shoppingListManager;
+	private ArticleManager articleManager;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +37,7 @@ public class ServletTestFLO extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		shoppingListManager = new ShoppingListManager();
+		articleManager = new ArticleManager();
 		super.init();
 	}
 
@@ -45,11 +48,11 @@ public class ServletTestFLO extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			List<ShoppingList> test =  shoppingListManager.getAllShoppingList();
-			for (ShoppingList s : test) {
-				System.out.println(s.getName());
-			}
-			
+			//shoppingListManager.createShoppingList("list4", "article4");
+			shoppingListManager.deleteList(12);
+//			articleManager.createArticle("pate", new ShoppingList(12, "deleted"));
+//			articleManager.createArticle("riz", new ShoppingList(12, "deleted"));
+
 		} catch (DALException e ) {
 			e.printStackTrace();
 		}

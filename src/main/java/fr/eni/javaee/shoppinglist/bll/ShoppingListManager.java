@@ -38,5 +38,11 @@ public class ShoppingListManager {
 		return shoppingListDAO.getAllShoppingList();
 	}
 	
+	public void deleteList(int listId) throws DALException {
+		articleManager.deleteAllArticleForList(listId);
+		shoppingListDAO.delete(listId);
+		
+	}
+	
 	
 }
