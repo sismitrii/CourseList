@@ -12,7 +12,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public void insert(Article article) throws DALException {
-		String INSERT = "INSERT INTO List (name, listId) VALUES (?,?)";
+		String INSERT = "INSERT INTO Article (name, listId) VALUES (?,?)";
 		if (article == null) {
 			throw new DALException("Enable to insert null article");
 		}
