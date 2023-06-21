@@ -6,7 +6,7 @@
 					<a class="btn" href="<%= request.getContextPath() %>/ServletListManager" title="Créer une nouvelle liste"><i class="material-icons">add</i></a>
 				</c:if>
 				<c:if test="${param.sourcePage eq 'manageList'}">
-					<a class="btn" href="<%= request.getContextPath() %>/Homepage" title="Accueil"><i class="material-icons">add</i></a>
+					<a class="btn" href="<%= request.getContextPath() %>/Homepage" title="Accueil"><i class="material-icons">arrow_back</i></a>
 				</c:if>
 			</div>
 			<div class="credits col-lg-12 text-center">ShoppingList App&trade; - &copy; GUÉRIN Florian & THEBAULT Dimitry 2023 (via ENI Nantes)</div>
