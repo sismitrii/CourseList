@@ -4,6 +4,7 @@
 %>
 
 <%@include file="fragments/header.jsp" %>
+<% error = true; %>
 <div class="col-12">
     <h2 class="my-5 text-center"><%= secondaryTitle %></h2>
 </div>

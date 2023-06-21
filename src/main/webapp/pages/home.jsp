@@ -2,7 +2,12 @@
 	String mainTitle = "Courses";
 	String secondaryTitle = "Liste prédéfinies";
 %>
-<%@include file="fragments/header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="./fragments/header.jsp">
+	<jsp:param name="mainTitle" value="<%= mainTitle %>"/>
+	<jsp:param name="secondaryTitle" value="<%= secondaryTitle %>"/>
+</jsp:include>
+
 		<div class="MainContainer">
 			<div class="content">
 				<div class="col-12">
@@ -14,17 +19,17 @@
 				        		<c:forEach items="${lists}" var="v">
 				            <li class="list-group-item d-flex justify-content-between align-items-center">${v.getName()}
 				                <div>
-				                    <a href="panier.html" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
+				                    <a href="panier.html?id=${v.getShoppingListId()}" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
 				                    <a href="#supprimer" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
 				                </div>
+				             </li>
 										</c:forEach>
-				            </li>
+				            
 				        </ul>
 				    </div>
 				</div>
 			</div>
 		</div>
 
-
-<%@include file="fragments/footer.jsp" %>
+<jsp:include page="./fragments/footer.jsp"></jsp:include>
 
