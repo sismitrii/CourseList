@@ -3,7 +3,8 @@
 			<div class="col-lg-4 offset-lg-4 text-center">
 				<a class="btn" href="nouvelle_liste.html" title="Créer une nouvelle liste"><i class="material-icons">add</i></a>
 			</div>
-			<!-- /.container -->
+			<div class="credits col-lg-12 text-center">ShoppingList App&trade; - &copy; GUÉRIN Florian & THEBAULT Dimitry 2023 (via ENI Nantes)</div>
+			<!-- /container -->
 		</footer>
 	</body>
 </html>

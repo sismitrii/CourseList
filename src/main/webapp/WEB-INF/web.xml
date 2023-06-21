@@ -7,9 +7,21 @@
   
   <servlet>
   	<servlet-name>Homepage</servlet-name>
-  	<servlet-class>fr.eni.javaee.shoppinglist.bll.MainServlet</servlet-class>
+  	<servlet-class>fr.eni.javaee.shoppinglist.ihm.MainServlet</servlet-class>
   </servlet>
   
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/pages/error404.jsp</location>
+  </error-page>
   
+  <error-page>
+  	<error-code>500</error-code>
+  	<location>/pages/error500.jsp</location>
+  </error-page>
+  
+  <session-config>
+  	<session-timeout>10</session-timeout>
+  </session-config>
 	
 </web-app>

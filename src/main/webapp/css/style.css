@@ -1,2 +1,25 @@
 @charset "UTF-8";
 
+footer {
+	color :white;
+}
+
+footer .credits{
+	margin-bottom : 10px;
+}
+
+footer a.btn {
+	color : gray;
+}
+
+footer a.btn:hover {
+	color : white;
+}
+
+div.clear {
+	clear : both;
+}
+
+div.headerSpacer {
+	min-height : 50px;
+}

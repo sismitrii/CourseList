@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 	<!-- META -->
@@ -21,12 +22,13 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
    
 	
-	<title>ShoppingList - <%= title %></title>
+	<title>ShoppingList - <%= mainTitle %></title>
 	</head>
 <body class="container">
 
-<header class="py-3 bg-dark header-demodule fixed-top">
- <div class="container text-center text-white">
- 	<h1>Courses</h1>
- </div>
-</header>
+	<header class="py-3 bg-dark header-demodule fixed-top">
+	 <div class="container text-center text-white">
+	 	<h1><%= mainTitle %></h1>
+	 </div>
+	</header>
+	<div class="headerSpacer"></div> 
