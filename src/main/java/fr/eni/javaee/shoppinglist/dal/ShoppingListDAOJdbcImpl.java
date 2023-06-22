@@ -92,5 +92,25 @@ public class ShoppingListDAOJdbcImpl implements ShoppingListDAO {
 
 		return null;
 	}
+
+	@Override
+	public void rename(String shoppingListName, int shoppingListId) throws DALException {
+		String UPDATE = "UPDATE List SET [name] = (?)  WHERE [listId] = ? ;";
+
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(UPDATE);
+			pst.setString(1, shoppingListName);
+			pst.setInt(2, shoppingListId);
+			int modif = pst.executeUpdate();
+			if (modif <=0) {
+				throw new DALException(String.format("No List found for this listId : %d", shoppingListId ));
+			}
+		} catch (SQLException e) {
+			String message = String.format("An error happen during update name of List : %d", shoppingListId);
+			e.printStackTrace();
+			System.err.println(message);
+			throw new DALException(message);
+		} 
+	}
 	
 }

@@ -14,5 +14,7 @@ public interface ShoppingListDAO {
 	public List<ShoppingList> getAllShoppingList() throws DALException;
 	
 	public ShoppingList getShoppingListById(int shoppingListId) throws DALException;
+	
+	public void rename(String shoppingListName, int shoppingListId) throws DALException;
 
 }

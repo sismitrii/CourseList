@@ -53,7 +53,14 @@ public class ShoppingListManager {
 		shoppingList.setArticleList(articleManager.getArticlesForShoppingList(shoppingListId));
 		
 		return shoppingList;
+	}
+	
+	public void renameShoppingList(String shoppingListName, int shoppingListId) throws BusinessException, DALException {
+		if (shoppingListName == null || StringUtils.isEmpty(shoppingListName)) {
+			throw new BusinessException("Name of the shopingList to create can't be null or empty");
+		}
 		
+		shoppingListDAO.rename(shoppingListName,shoppingListId );
 	}
 	
 	
