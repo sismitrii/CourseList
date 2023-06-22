@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.javaee.shoppinglist.BusinessException;
-import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.exception.BusinessException;
+import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
 import fr.eni.javaee.shoppinglist.bo.Article;

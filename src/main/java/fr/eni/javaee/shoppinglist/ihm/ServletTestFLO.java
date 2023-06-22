@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.javaee.shoppinglist.BusinessException;
-import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.exception.BusinessException;
+import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
 import fr.eni.javaee.shoppinglist.bo.Article;
@@ -52,7 +52,7 @@ public class ServletTestFLO extends HttpServlet {
 			//int test = shoppingListManager.createShoppingList("list22", "article22");
 			//shoppingListManager.deleteList(15);
 //			int test = articleManager.createArticle("pate", 16);
-//			articleManager.createArticle("riz", 16);
+			articleManager.createArticle("riz", 100);
 //			ShoppingList test = shoppingListManager.getShoppingListById(17);
 //			System.out.println(test.getName());
 //			System.out.println(test.getShoppingListId());
@@ -63,7 +63,7 @@ public class ServletTestFLO extends HttpServlet {
 //			articleManager.changeStatus(article.getArticleId());
 			articleManager.resetShoppingListStatus(16);
 			
-		} catch (DALException e ) {
+		} catch (DALException | BusinessException e ) {
 			e.printStackTrace();
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());

@@ -2,7 +2,7 @@ package fr.eni.javaee.shoppinglist.dal;
 
 import java.util.List;
 
-import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bo.Article;
 
 public interface ArticleDAO {
