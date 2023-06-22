@@ -53,13 +53,17 @@ public class ServletTestFLO extends HttpServlet {
 			//shoppingListManager.deleteList(15);
 //			int test = articleManager.createArticle("pate", 16);
 //			articleManager.createArticle("riz", 16);
-			ShoppingList test = shoppingListManager.getShoppingListById(16);
-			System.out.println(test.getName());
-			System.out.println(test.getShoppingListId());
-			for (Article a : test.getArticleList()) {
-				System.out.println(a.getName());
-			}
-		} catch (DALException | BusinessException e ) {
+//			ShoppingList test = shoppingListManager.getShoppingListById(17);
+//			System.out.println(test.getName());
+//			System.out.println(test.getShoppingListId());
+//			for (Article a : test.getArticleList()) {
+//				System.out.println(a.getName());
+//			}
+//			Article article = test.getArticleList().get(1);
+//			articleManager.changeStatus(article.getArticleId());
+			articleManager.resetShoppingListStatus(16);
+			
+		} catch (DALException e ) {
 			e.printStackTrace();
 		}
 		response.getWriter().append("Served at: ").append(request.getContextPath());
