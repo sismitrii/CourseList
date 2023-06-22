@@ -9,9 +9,11 @@
 
 <c:set var="listId" value="-1" />
 <c:set var="disabled" value="" />
+<c:set var="hidden" value="hidden" />
 <c:if test="${!empty list.getShoppingListId()}">
 	<c:set var="listId" value="${list.getShoppingListId()}" />
 	<c:set var="disabled" value="disabled" />
+	<c:set var="hidden" value="" />
 </c:if>
 <jsp:include page="./fragments/header.jsp">
 	<jsp:param name="mainTitle" value="${mainTitle}"/>
@@ -22,16 +24,17 @@
 		<main class="MainContainer">
 			<div class="content">
 				<div class="col-12">
-						<form id="manageListForm" name="manageListForm" method="POST" action="">
+						<form id="manageListForm" name="manageListForm" method="POST" action="<%=request.getContextPath() %>/ServletListManager">
 							<input type="hidden" name="listId" id="listId" value="${listId}" />
 					    <div class="row">
 					    	<div style="margin : auto;">
 					    		<span>Nom :</span>
-					    		<input type="text" id="listName" name="listName" value="${list.getName()}" ${disabled} />
-					    		<a id="editNameIcon" onClick="" href=#><i class="material-icons">edit</i></a>
-					    		<a id="validateName" class="text-success" href=# onClick=""><i class="material-icons">done</i></a>
-					    		<a id="validateName" class="text-danger" href=# onClick=""><i class="material-icons">close</i></a>
-					        	<ul class="list-group col-12">
+									<input type="hidden" name="rename" id="rename" value=""  />
+					    			<input type="text" id="listName" name="listName" value="${list.getName()}" ${disabled} />
+ 					    			<a id="editNameIcon" onClick="toggleEditName(true)" ${hidden} href=#><i class="material-icons">edit</i></a>
+					    			<a id="validateName" class="text-success" href=# onClick="changeName()" hidden><i class="material-icons">done</i></a>
+					    			<a id="resetName" class="text-danger" href=# onClick="toggleEditName(false)" hidden><i class="material-icons">close</i></a>
+ 					        	<ul class="list-group col-12">
 					        		<!--  ONE LIST ITEM TEMPLATE -->
 					        		<c:forEach items="${articles}" var="v">
 						           		<li class="list-group-item d-flex justify-content-between align-items-center">${v.getName()}

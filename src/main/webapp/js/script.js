@@ -3,8 +3,8 @@ function get(id) {
 }
 
 function validate(id) {
-	var valid = true;
-  var listName;  
+	let valid = true;
+  let listName;  
   if(get("listName"+id) != null) {
 		listName = get("listName"+id).value;
 	  if(listName != null && listName != "") {
@@ -30,10 +30,41 @@ function validateNewArticle() {
 }
 
 function confirmListDeletion(id) {
-	var result = false
+	let result = false
 	if(confirm('Êtes vous sûr de vouloir supprimer la liste ?')) {
 		get('deleteListForm'+ id).submit();
 		result = true;
 	}
 	return result;
 }
+
+function toggleEditName(bool){
+		const editNameIcon = get("editNameIcon");
+		const validateName = get("validateName");
+		const resetName = get("resetName");
+		const listName = get("listName");
+		
+	if (bool == true){
+		editNameIcon.hidden = true;
+		validateName.hidden = false;
+		resetName.hidden = false;
+		listName.disabled = false;
+	} else if (bool == false){
+		editNameIcon.hidden = false;
+		validateName.hidden = true;
+		resetName.hidden = true;
+		get("manageListForm").reset();
+		listName.disabled = true;
+	}
+}
+
+function changeName(){
+	
+	if(confirm(`Êtes vous sûr de vouloir changer le nom de la liste ?`)) {
+		get('rename').value = 1;
+		get('manageListForm').submit();
+		return true;
+	}
+	return false
+}
+

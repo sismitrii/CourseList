@@ -94,42 +94,49 @@ public class ServletListManager extends HttpServlet {
 		int listId = -1;
 		ShoppingList sl = null;
 		List<Article> articles = new ArrayList<Article>();
-		// Je récupère l'id de la liste existante et je lui ajoute l'article
-		if(request.getParameter("listId") != null && Integer.parseInt(request.getParameter("listId")) != -1) {
-			listId = Integer.parseInt(request.getParameter("listId"));
-			try {
-				articleManager.createArticle(request.getParameter("articleName"), listId);
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		// Sinon créer la liste et récupérer son id après la création
-		} else {
-			try {
-				listId = shoppingListManager.createShoppingList(request.getParameter("listName"), request.getParameter("articleName"));
-			} catch (BusinessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		System.out.println("rename" + request.getParameter("rename"));
+				
+			// Je récupère l'id de la liste existante et je lui ajoute l'article
+						if(request.getParameter("listId") != null && Integer.parseInt(request.getParameter("listId")) != -1) {
+							if (request.getParameter("rename") != null && StringUtils.isNoneEmpty(request.getParameter("rename"))&& Integer.parseInt(request.getParameter("rename")) == 1) {
+								try {
+									shoppingListManager.renameShoppingList(request.getParameter("listName"),Integer.parseInt(request.getParameter("listId")));
+									listId = Integer.parseInt(request.getParameter("listId"));
+								} catch (NumberFormatException |BusinessException | DALException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							} else {
+								listId = Integer.parseInt(request.getParameter("listId"));
+								try {
+									articleManager.createArticle(request.getParameter("articleName"), listId);
+								} catch (DALException | BusinessException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+						// Sinon créer la liste et récupérer son id après la création
+						} else {
+						
+							try {
+								System.out.println(request.getParameter("articleName"));
+								listId = shoppingListManager.createShoppingList(request.getParameter("listName"), request.getParameter("articleName"));
+							} catch (BusinessException | DALException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+						// Dans tous les cas je construis les éléments nécessaires à l'affichage
+						try {
+							sl = shoppingListManager.getShoppingListById(listId);
+							articles = articleManager.getArticlesForShoppingList(sl.getShoppingListId());
+						} catch (DALException |BusinessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+
 		
-		// Dans tous les cas je construis les éléments nécessaires à l'affichage
-		try {
-			sl = shoppingListManager.getShoppingListById(listId);
-			articles = articleManager.getArticlesForShoppingList(sl.getShoppingListId());
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		request.setAttribute("list", sl);
 		request.setAttribute("articles", articles);
