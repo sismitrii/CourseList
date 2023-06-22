@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import fr.eni.javaee.shoppinglist.DALException;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
 import fr.eni.javaee.shoppinglist.bo.ShoppingList;
@@ -69,8 +71,8 @@ public class MainServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/home.jsp");
 		
 		int listId;
-		if(request.getAttribute("listId") != null) {
-			listId = Integer.parseInt((String)request.getAttribute("listId"));
+		if(request.getParameter("listId") != null && StringUtils.isNotEmpty(request.getParameter("listId"))) {
+			listId = Integer.parseInt((String)request.getParameter("listId"));
 			try {
 				shoppingListManager.deleteList(listId);
 			} catch (DALException e) {
