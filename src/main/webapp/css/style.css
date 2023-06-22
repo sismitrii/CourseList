@@ -79,7 +79,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-top: 10px;
+	margin-top: 50px;
 }
 
 .oopsButton {
@@ -95,4 +95,6 @@ main {
 
 .oopsButton:hover {
 	background-color: #cc0000;
+	color: #fff;
+	text-decoration: none;
 }

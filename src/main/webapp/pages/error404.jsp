@@ -13,11 +13,8 @@
 <main class="oopsMain">
     <h2 class="oopsTitle">Oops, vous êtes perdu(e) !</h2>
     <p class="oopsText">La page que vous recherchez semble avoir été avalée par un trou noir intergalactique.</p>
-    <img class="oopsImage rounded" src="/ShoppingList/images/blackhole.jpg" alt="Erreur 404 - Page introuvable">
+    <img class="oopsImage rounded" src="<%=request.getContextPath() %>/images/blackhole.jpg" alt="Erreur 404 - Page introuvable">
     <div class="oopsContainer">
-        <p>Voici quelques options pour vous aider :</p>
-        <a class="oopsButton" href="/MainServlet">Retourner à la page d'accueil</a>
-        <br>
         <a class="oopsButton" href="mailto:admin@example.com">Contacter l'administrateur</a>
     </div>
 </main>
