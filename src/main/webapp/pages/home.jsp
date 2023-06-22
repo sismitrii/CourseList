@@ -1,20 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="mainTitle" value="Courses" />
 <c:set var="secondaryTitle" value="Liste prédéfinies" />
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <jsp:include page="./fragments/header.jsp">
 	<jsp:param name="mainTitle" value="${mainTitle}"/>
 	<jsp:param name="secondaryTitle" value="${secondaryTitle}"/>
 </jsp:include>
 
-		<div class="MainContainer">
+		<main class="MainContainer">
 			<div class="content">
-				<div class="col-12">
-				    <h2 class="my-5 text-center">${secondaryTitle}</h2>
-				
+				<div class="col-12">			
 				    <div class="row">
 				        <ul class="list-group col-12">
 				        		<!--  ONE LIST ITEM TEMPLATE -->
-				        		<c:forEach items="${lists}" var="v">
+				        	<c:forEach items="${lists}" var="v">
 				            <li class="list-group-item d-flex justify-content-between align-items-center">${v.getName()}
 				            <!-- 
 				            <form method="POST" action="" id="list${v.getShoppingListId()}" name="list${v.getShoppingListId()}">
@@ -28,13 +28,13 @@
 				                    <form method="POST" action="<%= request.getContextPath() %>/Homepage"><a href="#supprimer" onClick="" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a></form>
 				                </div>
 				             </li>
-										</c:forEach>
+							</c:forEach>
 				            
 				        </ul>
 				    </div>
 				</div>
 			</div>
-		</div>
+		</main>
 
 <jsp:include page="./fragments/footer.jsp">
 	<jsp:param name="sourcePage" value="home"/>
