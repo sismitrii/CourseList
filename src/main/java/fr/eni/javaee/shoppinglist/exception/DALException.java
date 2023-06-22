@@ -1,4 +1,4 @@
-package fr.eni.javaee.shoppinglist;
+package fr.eni.javaee.shoppinglist.exception;
 
 public class DALException extends Exception{
 

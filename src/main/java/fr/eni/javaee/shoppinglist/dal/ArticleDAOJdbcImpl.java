@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bo.Article;
 import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 
@@ -21,6 +21,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			throw new DALException("Enable to insert null article");
 		}
 		
+		// comment etre sur que la shoppingListId existe ? 
 		try( Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pst = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setString(1, article.getName());
@@ -32,9 +33,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			}
 			
 		} catch (SQLException e) {
-			String message = String.format("An error happen during insert of Article : %s", article.getName());
+			String message = String.format("An error happen during insert of Article : %s.", article.getName());
+			if (e.getMessage().contains("FOREIGN_KEY")) {
+				message += String.format("Impossible to add an Article in an unexisting List : %d", shoppingListId);
+			}
 			e.printStackTrace();
-			System.err.println(message);
+			System.out.println(message);
 			throw new DALException(message);
 		}
 	}
@@ -48,7 +52,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			pst.setInt(1, articleId);
 			int modif = pst.executeUpdate();
 			if (modif <=0) {
-				System.out.println("No Article found for this Id");
+				// Should we throw an error ? 
+				System.out.println(String.format("No Article found for this Id : %d",articleId ));
 			}
 		} catch (SQLException e) {
 			String message = String.format("An error happen during delete Article : %d", articleId);
@@ -66,26 +71,19 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			pst.setInt(1, listId);
 			int modif = pst.executeUpdate();
 			if (modif <=0) {
-				throw new DALException(String.format("No Article found for this listId : %d", listId ));
+				// throw an error is maybe not a good idea because it's a possible case..
+				// if the last article is manually deleted and the list is deleted after ?
+				//throw new DALException(String.format("No Article found for this listId : %d", listId ));
+				System.out.println(String.format("No Article found for this listId : %d", listId ));
 			}
 		} catch (SQLException e) {
 			String message = String.format("An error happen during delete of articles of List : %d", listId);
 			e.printStackTrace();
-			System.err.println(message);
+			System.out.println(message);
 			throw new DALException(message);
 		}		
 	}
-//
-//	@Override
-//	public void changeStatus(int articleId, boolean status) {
-//		// TODO 
-//		
-//	}
-//
-//	@Override
-//	public void changeAllStatus() {
-//		// TODO 
-
+	
 	@Override
 	public List<Article> getArticleByShoppingListId(int shoppingListId) throws DALException {
 		List<Article> articles = new ArrayList<>();
@@ -104,6 +102,47 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		return articles;
 	}
+
+	@Override
+	public void changeStatus(int articleId) throws DALException {
+		String UPDATE = "UPDATE Article SET [status] = ~(status)  WHERE [articleId] = ?;";
+
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(UPDATE);
+			pst.setInt(1, articleId);
+			int modif = pst.executeUpdate();
+			if (modif <=0) {
+				throw new DALException(String.format("No Article found for this articleId : %d", articleId ));
+			}
+		} catch (SQLException e) {
+			String message = String.format("An error happen during update of articles : %d", articleId);
+			e.printStackTrace();
+			System.err.println(message);
+			throw new DALException(message);
+		} 	
+	}
+
+	@Override
+	public void resetStatusForShoppingListArticle(int shoppingListId) throws DALException {
+		String UPDATE_FOR_LIST_ID = "UPDATE Article SET [status] = 0  WHERE [listId] = ?;";
+
+		try( Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pst = cnx.prepareStatement(UPDATE_FOR_LIST_ID);
+			pst.setInt(1, shoppingListId);
+			int modif = pst.executeUpdate();
+			if (modif <=0) {
+				System.out.println(String.format("No articles status modified for this shoppingList : %d",shoppingListId ));
+			}
+		} catch (SQLException e) {
+			String message = String.format("An error happen during update of articles of the shoppingList : %d", shoppingListId);
+			e.printStackTrace();
+			System.err.println(message);
+			throw new DALException(message);
+		} 	
+		
+	}
+
+
 		
 //	}
 	

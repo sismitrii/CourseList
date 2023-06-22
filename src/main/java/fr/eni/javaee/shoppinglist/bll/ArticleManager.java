@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.microsoft.sqlserver.jdbc.StringUtils;
 
-import fr.eni.javaee.shoppinglist.BusinessException;
-import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.exception.BusinessException;
+import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bo.Article;
 import fr.eni.javaee.shoppinglist.bo.ShoppingList;
 import fr.eni.javaee.shoppinglist.dal.ArticleDAO;
@@ -28,7 +28,6 @@ public class ArticleManager {
 		return articleToInsert.getArticleId();
 	}
 		
-	
 	public void deleteArticle(int articleId) throws DALException {
 		
 		articleDAO.delete(articleId);
@@ -40,6 +39,14 @@ public class ArticleManager {
 	
 	public List<Article> getArticlesForShoppingList(int shoppingListId) throws DALException{
 		return articleDAO.getArticleByShoppingListId(shoppingListId);
+	}
+	
+	public void changeStatus(int articleId) throws DALException {
+		articleDAO.changeStatus(articleId);
+	}
+	
+	public void resetShoppingListStatus(int shoppingListId) throws DALException {
+		articleDAO.resetStatusForShoppingListArticle(shoppingListId);
 	}
 	
 
