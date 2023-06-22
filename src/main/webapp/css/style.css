@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+form {
+	display : inline;
+}
+
 #addArticle i {
 	padding-top : 5px;
 }
@@ -15,6 +19,19 @@ footer a.btn {
 	color : gray;
 	padding : 5px 5px 0px 5px;
 	margin-top : 7px;
+}
+
+footer a.btn.manageKart.homepage {
+	float : left;
+}
+
+footer a.btn.manageKart.resetList {
+	float : right;
+}
+
+footer a.btn i {
+	width : 24px;
+	height : 24px;
 }
 
 footer a.btn:hover {

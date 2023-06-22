@@ -28,3 +28,12 @@ function validate(id) {
 function validateNewArticle() {
 	
 }
+
+function confirmListDeletion(id) {
+	var result = false
+	if(confirm('Êtes vous sûr de vouloir supprimer la liste ?')) {
+		get('deleteListForm'+ id).submit();
+		result = true;
+	}
+	return result;
+}

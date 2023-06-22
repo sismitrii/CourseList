@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import fr.eni.javaee.shoppinglist.exception.BusinessException;
 import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bll.ArticleManager;
@@ -47,10 +48,8 @@ public class ServletListManager extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/manageList.jsp");
 		
-		System.out.println(request.getParameter("articleId"));
-		if(request.getParameter("articleId") != null) {
-			System.out.println(request.getParameter("articleId"));
-			if(request.getParameter("action") != null) {
+		if(request.getParameter("articleId") != null && StringUtils.isNotEmpty(request.getParameter("articleId"))) {
+			if(request.getParameter("action") != null && StringUtils.isNotEmpty(request.getParameter("articleId"))) {
 				switch (request.getParameter("action")) {
 				case "delete":
 						try {
@@ -69,7 +68,7 @@ public class ServletListManager extends HttpServlet {
 		}
 		
 		int listId;
-		if(request.getParameter("listId") != null && Integer.parseInt(request.getParameter("listId")) != -1) {
+		if(request.getParameter("listId") != null && StringUtils.isNotEmpty(request.getParameter("listId")) && Integer.parseInt(request.getParameter("listId")) != -1) {
 			listId = Integer.parseInt(request.getParameter("listId"));
 			try {
 				ShoppingList sl = shoppingListManager.getShoppingListById(listId);
