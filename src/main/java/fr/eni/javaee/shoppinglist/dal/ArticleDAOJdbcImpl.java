@@ -104,7 +104,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public void changeStatus(int articleId) throws DALException {
+	public void toggleStatus(int articleId) throws DALException {
 		String UPDATE = "UPDATE Article SET [status] = ~(status)  WHERE [articleId] = ?;";
 
 		try( Connection cnx = ConnectionProvider.getConnection()) {

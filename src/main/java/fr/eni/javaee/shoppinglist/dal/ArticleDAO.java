@@ -15,7 +15,7 @@ public interface ArticleDAO {
 
 	public List<Article> getArticleByShoppingListId(int shoppingListId) throws DALException;
 
-	public void changeStatus(int articleId) throws DALException;
+	public void toggleStatus(int articleId) throws DALException;
 	
 	public void resetStatusForShoppingListArticle(int shoppingListId) throws DALException;
 }

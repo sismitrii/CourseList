@@ -7,8 +7,7 @@
 	<jsp:param name="mainTitle" value="${mainTitle}"/>
 	<jsp:param name="secondaryTitle" value="${secondaryTitle}"/>
 </jsp:include>
-
-		<main class="MainContainer">
+		<main class="mainContainer">
 			<div class="content">
 				<div class="col-12">			
 				    <div class="row">
@@ -16,12 +15,6 @@
 				        		<!--  ONE LIST ITEM TEMPLATE -->
 				        	<c:forEach items="${lists}" var="v">
 				            <li class="list-group-item d-flex justify-content-between align-items-center">${v.getName()}
-				            <!-- 
-				            <form method="POST" action="" id="list${v.getShoppingListId()}" name="list${v.getShoppingListId()}">
-				            	<input type="text" id="listName${v.getShoppingListId()}" name="listName${v.getShoppingListId()}" value="${v.getName()}" />
-				            	<a onClick="validate(${v.getShoppingListId()});" >Valider</a>
-				            </form>
-				              -->
 				                <div>
 				                    <a href="<%= request.getContextPath() %>/ServletKartManager?listId=${v.getShoppingListId()}" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
 				                    <!-- <a href="#" class="badge" title="Renommer la liste"><i class="material-icons">edit</i></a> -->

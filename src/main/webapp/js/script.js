@@ -68,3 +68,12 @@ function changeName(){
 	return false
 }
 
+
+function confirmListReset() {
+	var result = false
+	if(confirm('Êtes vous sûr de vouloir réinitialiser la liste ?')) {
+		get('listReset').submit();
+		result = true;
+	}
+	return result;
+}

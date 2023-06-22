@@ -77,11 +77,28 @@ public class ServletKartManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int listId = -1;
+		int articleId = -1;
 		if(request.getParameter("listId") != null && StringUtils.isNotEmpty(request.getParameter("listId"))) {
+			listId = Integer.parseInt(request.getParameter("listId"));
 			if(request.getParameter("articleId") != null && StringUtils.isNotEmpty(request.getParameter("articleId"))) {
+				articleId = Integer.parseInt(request.getParameter("articleId"));
+				System.out.println("article concerné " +articleId);
 				// toggleOne
+				try {
+					articleManager.toggleStatus(articleId);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+						
 			} else {
 				// unCheckAll
+				try {
+					articleManager.resetShoppingListStatus(listId);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
