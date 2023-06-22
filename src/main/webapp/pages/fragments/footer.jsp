@@ -10,9 +10,9 @@
 				</c:if>
 				<c:if test="${param.sourcePage eq 'manageKart'}">
 					<a class="btn homepage ${param.sourcePage}" href="<%= request.getContextPath() %>/" title="Accueil"><i class="material-icons">arrow_back</i></a>
-					<form method="POST" action="" id="" name="">
+					<form method="POST" action="<%= request.getContextPath() %>/ServletKartManager" id="listReset" name="listReset">
 						<input type="hidden" name="listId" value="${param.listId}" />
-						<a class="btn resetList  ${param.sourcePage}" href="#" title="Réinitialiser le panier" onClick="confirmListRest();"><i class="material-icons">remove_done</i></a>
+						<a class="btn resetList ${param.sourcePage}" href="#" title="Réinitialiser le panier" onClick="confirmListReset();"><i class="material-icons">remove_done</i></a>
 					</form>
 				</c:if>
 			</div>

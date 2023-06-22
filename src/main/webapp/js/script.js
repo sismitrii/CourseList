@@ -38,10 +38,10 @@ function confirmListDeletion(id) {
 	return result;
 }
 
-function confirmListReset(id) {
+function confirmListReset() {
 	var result = false
 	if(confirm('Êtes vous sûr de vouloir réinitialiser la liste ?')) {
-		get('deleteListForm'+ id).submit();
+		get('listReset').submit();
 		result = true;
 	}
 	return result;

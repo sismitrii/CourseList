@@ -6,7 +6,7 @@
 	<jsp:param name="mainTitle" value="${mainTitle}"/>
 	<jsp:param name="secondaryTitle" value="${secondaryTitle}"/>
 </jsp:include>
-		<div class="MainContainer">
+		<main class="MainContainer">
 			<div class="content">
 				<div class="col-12">
 				    <h2 class="my-5 text-center">${secondaryTitle}<br />${list.getName()}</h2>
@@ -16,13 +16,14 @@
 				        		<!--  ONE LIST ITEM TEMPLATE -->
 				        		<c:forEach items="${articles}" var="v">
 				        			<c:set var="checked" value="" />
-				        			<c:if test="${v.getArticleStatus()}">
+				        			<c:if test="${v.isStatus()}">
 												<c:set var="checked" value="checked" />
 											</c:if>
-					            <li class="list-group-item d-flex justify-content-between align-items-center">${v.getName()}
+					            <li class="list-group-item d-flex justify-content-between align-items-center"><span class="listItem ${checked}">${v.getName()}</span>
 					                <div>
 					                	<form id="formToggleArticle${v.getArticleId()}" name="formToggleArticle${v.getArticleId()}" method="POST" action="<%= request.getContextPath() %>/ServletKartManager">
-					                		<input type="checkbox" name="articleId" value="${v.getArticleId()}" id="article${v.getArticleId()}" onClick="get('formToggleArticle${v.getArticleId()}').submit();" ${checked} />
+					                		<input type="checkbox" name="check" value="${v.getArticleId()}" id="article${v.getArticleId()}" onClick="get('formToggleArticle${v.getArticleId()}').submit();" ${checked} />
+					                		<input type="hidden" name="articleId" value="${v.getArticleId()}" />
 					                		<input type="hidden" name="listId" value="${list.getShoppingListId()}" />
 					                	</form>
 					                </div>
@@ -32,7 +33,7 @@
 				    </div>
 				</div>
 			</div>
-		</div>
+		</main>
 
 <jsp:include page="./fragments/footer.jsp">
 	<jsp:param name="sourcePage" value="manageKart"/>

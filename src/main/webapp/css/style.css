@@ -7,6 +7,7 @@ form {
 #addArticle i {
 	padding-top : 5px;
 }
+
 footer {
 	color :white;
 }
@@ -46,4 +47,8 @@ div.clear {
 
 div.headerSpacer {
 	min-height : 50px;
+}
+
+.listItem.checked {
+	text-decoration : line-through;
 }

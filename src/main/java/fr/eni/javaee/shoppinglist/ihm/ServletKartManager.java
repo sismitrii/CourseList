@@ -82,6 +82,7 @@ public class ServletKartManager extends HttpServlet {
 			listId = Integer.parseInt(request.getParameter("listId"));
 			if(request.getParameter("articleId") != null && StringUtils.isNotEmpty(request.getParameter("articleId"))) {
 				articleId = Integer.parseInt(request.getParameter("articleId"));
+				System.out.println("article concerné " +articleId);
 				// toggleOne
 				try {
 					articleManager.toggleStatus(articleId);
