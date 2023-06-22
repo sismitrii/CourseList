@@ -25,7 +25,7 @@
 				                <div>
 				                    <a href="panier.html?id=${v.getShoppingListId()}" class="badge" title="Commencer ses courses"><i class="material-icons">shopping_cart</i></a>
 				                    <!-- <a href="#" class="badge" title="Renommer la liste"><i class="material-icons">edit</i></a> -->
-				                    <a href="#supprimer" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a>
+				                    <form method="POST" action="<%= request.getContextPath() %>/Homepage"><a href="#supprimer" onClick="" class="badge text-danger" title="Supprimer"><i class="material-icons">delete</i></a></form>
 				                </div>
 				             </li>
 										</c:forEach>

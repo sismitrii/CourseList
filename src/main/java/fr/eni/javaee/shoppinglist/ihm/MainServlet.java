@@ -38,14 +38,7 @@ public class MainServlet extends HttpServlet {
 		shoppingListManager = new ShoppingListManager();
 	}
 
-
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/pages/home.jsp");
-		
+	private List<ShoppingList> getLists() {
 		List<ShoppingList> lists = new ArrayList<>();
 		
 		try {
@@ -53,7 +46,17 @@ public class MainServlet extends HttpServlet {
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		return lists;
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/pages/home.jsp");
+		
+		List<ShoppingList> lists = this.getLists();	
 		request.setAttribute("lists", lists);
 		
 		rd.forward(request, response);
@@ -63,8 +66,23 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/pages/home.jsp");
+		
+		int listId;
+		if(request.getAttribute("listId") != null) {
+			listId = Integer.parseInt((String)request.getAttribute("listId"));
+			try {
+				shoppingListManager.deleteList(listId);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		List<ShoppingList> lists = this.getLists();	
+		request.setAttribute("lists", lists);
+		
+		rd.forward(request, response);
 	}
 
 }

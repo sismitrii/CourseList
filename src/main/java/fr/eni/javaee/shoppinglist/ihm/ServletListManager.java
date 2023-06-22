@@ -2,6 +2,7 @@ package fr.eni.javaee.shoppinglist.ihm;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.javaee.shoppinglist.BusinessException;
+import fr.eni.javaee.shoppinglist.DALException;
 import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
 import fr.eni.javaee.shoppinglist.bo.Article;
@@ -38,31 +41,26 @@ public class ServletListManager extends HttpServlet {
 		articleManager = new ArticleManager();
 	}
 
-
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/manageList.jsp");
 		
-		if(request.getParameter("articleId") == null) {
-			ShoppingList sl = new ShoppingList(1, "maListeUne");
-			
-			Article a1 = new Article(1, "Beurre", false, sl);
-			Article a2 = new Article(2, "Pain", false, sl);
-			ArrayList<Article> articles = new ArrayList<>();
-			articles.add(a1);
-			articles.add(a2);
-			
-			request.setAttribute("list", sl);
-			request.setAttribute("articles", articles);
-		} else {
+		System.out.println(request.getParameter("articleId"));
+		if(request.getParameter("articleId") != null) {
+			System.out.println(request.getParameter("articleId"));
 			if(request.getParameter("action") != null) {
 				switch (request.getParameter("action")) {
 				case "delete":
-						if(request.getParameter("articleId") != null) {
-							// articleManager.deleteArticle(Integer.parseInt(request.getParameter("articleId")));
+						try {
+							articleManager.deleteArticle(Integer.parseInt(request.getParameter("articleId")));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (DALException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					break;
 				}
@@ -73,10 +71,19 @@ public class ServletListManager extends HttpServlet {
 		int listId;
 		if(request.getParameter("listId") != null && Integer.parseInt(request.getParameter("listId")) != -1) {
 			listId = Integer.parseInt(request.getParameter("listId"));
-			// request.setAttribute("list", shoppingListManager.getShoppingListById(listId));
+			try {
+				ShoppingList sl = shoppingListManager.getShoppingListById(listId);
+				List<Article> articles = articleManager.getArticlesForShoppingList(sl.getShoppingListId());
+				request.setAttribute("list", sl);
+				request.setAttribute("articles", articles);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-		
 		rd.forward(request, response);
 	}
 
@@ -85,26 +92,48 @@ public class ServletListManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/pages/manageList.jsp");
-		/*
-		if(request.getAttribute("id") == -1) {
-			// Créer la liste
-		}
-		// Récupérer l'id
-		// Récupérer la liste avec l'id
-		if(request.getAttribute("action") != null)
-			
-		}
-		*/
-		int listId;
+		int listId = -1;
+		ShoppingList sl = null;
+		List<Article> articles = new ArrayList<Article>();
+		// Je récupère l'id de la liste existante et je lui ajoute l'article
 		if(request.getParameter("listId") != null && Integer.parseInt(request.getParameter("listId")) != -1) {
-			// Créer la liste
-			listId = 0;
-		} else {
 			listId = Integer.parseInt(request.getParameter("listId"));
+			try {
+				articleManager.createArticle(request.getParameter("articleName"), listId);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		// Sinon créer la liste et récupérer son id après la création
+		} else {
+			try {
+				listId = shoppingListManager.createShoppingList(request.getParameter("listName"), request.getParameter("articleName"));
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		// ShoppingList sl = shoppingListManager.getShoppingListById(listId);
 		
-		// Ajouter article dans la liste existante
+		// Dans tous les cas je construis les éléments nécessaires à l'affichage
+		try {
+			sl = shoppingListManager.getShoppingListById(listId);
+			articles = articleManager.getArticlesForShoppingList(sl.getShoppingListId());
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("list", sl);
+		request.setAttribute("articles", articles);
 		
 		rd.forward(request, response);
 	}
