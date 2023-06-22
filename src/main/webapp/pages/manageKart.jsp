@@ -6,7 +6,7 @@
 	<jsp:param name="mainTitle" value="${mainTitle}"/>
 	<jsp:param name="secondaryTitle" value="${secondaryTitle}"/>
 </jsp:include>
-		<main class="MainContainer">
+		<main class="mainContainer">
 			<div class="content">
 				<div class="col-12">
 				    <h2 class="my-5 text-center">${secondaryTitle}<br />${list.getName()}</h2>

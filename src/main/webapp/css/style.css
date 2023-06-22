@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.mainContainer{
+	margin-bottom : 120px;
+}
+
 form {
 	display : inline;
 }

@@ -17,7 +17,7 @@
 </jsp:include>
 
 
-		<div class="MainContainer">
+		<div class="mainContainer">
 			<div class="content">
 				<div class="col-12">
 				    <h2 class="my-5 text-center">${secondaryTitle}</h2>
