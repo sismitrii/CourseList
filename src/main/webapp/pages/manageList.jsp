@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="mainTitle" value="Courses" />
-<c:set var="secondaryTitle" value="Nouvelle Liste" />
+<c:set var="secondaryTitle" value="Nouvelle Liste" />^
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <c:if test="${!empty list}">
 	<c:set var="secondaryTitle" value="${list.getName()}" />
 </c:if>
@@ -15,12 +17,9 @@
 	<jsp:param name="mainTitle" value="${mainTitle}"/>
 	<jsp:param name="secondaryTitle" value="${secondaryTitle}"/>
 </jsp:include>
-
-
-		<div class="mainContainer">
+		<main class="mainContainer">
 			<div class="content">
 				<div class="col-12">
-				    <h2 class="my-5 text-center">${secondaryTitle}</h2>
 						<form id="manageListForm" name="manageListForm" method="POST" action="">
 							<input type="hidden" name="listId" id="listId" value="${listId}" />
 					    <div class="row">
@@ -47,7 +46,7 @@
 				    </form>
 				</div>
 			</div>
-		</div>
+		</main>
 
 <jsp:include page="./fragments/footer.jsp">
 	<jsp:param name="sourcePage" value="manageList"/>

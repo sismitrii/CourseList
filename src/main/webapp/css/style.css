@@ -53,6 +53,57 @@ div.headerSpacer {
 	min-height : 50px;
 }
 
+main {
+	margin : 130px 0px;
+}
+
 .listItem.checked {
 	text-decoration : line-through;
+}
+
+.oopsMain {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.oopsTitle {
+	font-size: 72px;
+    color: #800000;
+}
+
+.oopsText {
+	font-size: 24px;
+    color: #800000;
+    margin-bottom: 30px;
+        }
+        
+.oopsImage {
+	object-fit: cover;
+	width: 75%;
+	height: 300px;
+}
+
+.oopsContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.oopsButton {
+	display: inline-block;
+    padding: 12px 24px;
+    background-color: #800000;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.oopsButton:hover {
+	background-color: #cc0000;
+	color: #fff;
+	text-decoration: none;
 }
