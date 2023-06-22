@@ -10,7 +10,10 @@
 				</c:if>
 				<c:if test="${param.sourcePage eq 'manageKart'}">
 					<a class="btn homepage ${param.sourcePage}" href="<%= request.getContextPath() %>/" title="Accueil"><i class="material-icons">arrow_back</i></a>
-					<a class="btn resetList  ${param.sourcePage}" href="#" title="Réinitialiser le panier"><i class="material-icons">remove_done</i></a>
+					<form method="POST" action="" id="" name="">
+						<input type="hidden" name="listId" value="${param.listId}" />
+						<a class="btn resetList  ${param.sourcePage}" href="#" title="Réinitialiser le panier" onClick="confirmListRest();"><i class="material-icons">remove_done</i></a>
+					</form>
 				</c:if>
 			</div>
 			<div class="credits col-lg-12 text-center">ShoppingList App&trade; - &copy; GUÉRIN Florian & THEBAULT Dimitry 2023 (via ENI Nantes)</div>

@@ -37,3 +37,12 @@ function confirmListDeletion(id) {
 	}
 	return result;
 }
+
+function confirmListReset(id) {
+	var result = false
+	if(confirm('Êtes vous sûr de vouloir réinitialiser la liste ?')) {
+		get('deleteListForm'+ id).submit();
+		result = true;
+	}
+	return result;
+}

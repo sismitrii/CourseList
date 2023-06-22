@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.javaee.shoppinglist.BusinessException;
-import fr.eni.javaee.shoppinglist.DALException;
+import fr.eni.javaee.shoppinglist.exception.BusinessException;
+import fr.eni.javaee.shoppinglist.exception.DALException;
 import fr.eni.javaee.shoppinglist.bll.ArticleManager;
 import fr.eni.javaee.shoppinglist.bll.ShoppingListManager;
 import fr.eni.javaee.shoppinglist.bo.Article;
@@ -77,11 +77,27 @@ public class ServletKartManager extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int listId = -1;
+		int articleId = -1;
 		if(request.getParameter("listId") != null && StringUtils.isNotEmpty(request.getParameter("listId"))) {
+			listId = Integer.parseInt(request.getParameter("listId"));
 			if(request.getParameter("articleId") != null && StringUtils.isNotEmpty(request.getParameter("articleId"))) {
+				articleId = Integer.parseInt(request.getParameter("articleId"));
 				// toggleOne
+				try {
+					articleManager.toggleStatus(articleId);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+						
 			} else {
 				// unCheckAll
+				try {
+					articleManager.resetShoppingListStatus(listId);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
